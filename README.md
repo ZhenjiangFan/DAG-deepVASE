@@ -5,13 +5,13 @@
 
 # Special Package Requirements
 
-#### >rpy2
-#### >keras (please use the version of 2.3.1, which can be installed using "pip install Keras==2.3.1".)
-#### >Deeplift (please use the version of 0.5.1-theano, which should be downloaded online.)
-#### >Tensorflow (please use the version of 2.2.0. which can be installed using "pip install tensorflow==2.2.0")
-#### >jpype
-#### >R environment
-#### >Jave environment
+#### >>>rpy2
+#### >>>keras (please use the version of 2.3.1, which can be installed using "pip install Keras==2.3.1".)
+#### >>>Deeplift (please use the version of 0.5.1-theano, which should be downloaded online.)
+#### >>>Tensorflow (please use the version of 2.2.0. which can be installed using "pip install tensorflow==2.2.0")
+#### >>>jpype
+#### >>>R environment
+#### >>>Jave environment
 
 # Installation
 
@@ -29,7 +29,7 @@
 
 # Acknowledgement and References
 
-#### Some components of this project were implemented by the follwing projects:
+#### Some components of this project come from the follwing projects:
     The MGM Java implemention is from https://github.com/benoslab/causalMGM and https://www.ccd.pitt.edu/.
     The DeepPINK implementation is from https://github.com/younglululu/DeepPINK.
     The FDR filter function is from https://github.com/msesia/deepknockoffs.
@@ -38,6 +38,6 @@
 
 # Contact
 
-Please let us know if you have any questions, bug reports, or feedback through the following email:
+Please let us know if you have any questions, bug reports, or feedback via the following email:
     email
 
