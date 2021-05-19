@@ -25,7 +25,7 @@
 
 # Example
 
-#### The source code Example.ipynb demonstrates how to use causalDeepVASE.
+#### The source code [*/Example.ipynb*](./Example.ipynb) demonstrates how to use causalDeepVASE.
 
 # Acknowledgement and References
 
