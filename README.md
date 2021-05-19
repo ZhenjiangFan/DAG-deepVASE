@@ -7,7 +7,7 @@
 
 :stars: rpy2\
 :stars: keras\
-    > (please use the version of 2.3.1, which can be installed using "pip install Keras==2.3.1".)\
+> please use the version of 2.3.1, which can be installed using "pip install Keras==2.3.1".\
 :stars: Deeplift (please use the version of 0.5.1-theano, which should be downloaded online.)\
 :stars: Tensorflow (please use the version of 2.2.0. which can be installed using "pip install tensorflow==2.2.0")\
 :stars: jpype\
