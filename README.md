@@ -11,7 +11,7 @@
 #### >>>Tensorflow (please use the version of 2.2.0. which can be installed using "pip install tensorflow==2.2.0")
 #### >>>jpype
 #### >>>R environment
-#### >>>Jave environment
+#### >>>Java environment
 
 # Installation
 
@@ -38,6 +38,6 @@
 
 # Contact
 
-Please let us know if you have any questions, bug reports, or feedback via the following email:
-    email
+    Please let us know if you have any questions, bug reports, or feedback via the following email:
+    hyp15@pitt.edu
 
