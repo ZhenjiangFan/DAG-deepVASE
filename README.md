@@ -34,7 +34,7 @@
     The DeepPINK implementation is from [DeepPINK](https://github.com/younglululu/DeepPINK).
     The FDR filter function is from [DeepKnockoffs](https://github.com/msesia/deepknockoffs).
     The Python implementation of DG algorithm is based on its Java version from [Tetrad](https://www.ccd.pitt.edu).
-    The implementation of the PC algorithm used in this project is from [pcalg](https://github.com/keiichishima/pcalg).
+    The implementation of the PC algorithm used in this project is from [pcalg](https://github.com/keiichishima/pcalg).[link to Google!](http://google.com)
 
 # Contact
 
