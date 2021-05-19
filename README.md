@@ -19,8 +19,8 @@
 
 # Source Code 
 
-📁The sub folder [*/MGM*](./MGM/) contains the Python version of MGM implementation.
-📁 The sub folder [*/DL*](./DL/) contains the Python implemenation of DeepPINK procedure (knockoff data generation, DNN, and FDR).
+📁The sub folder [*/MGM*](./MGM/) contains the Python version of MGM implementation.\
+📁 The sub folder [*/DL*](./DL/) contains the Python implemenation of DeepPINK procedure (knockoff data generation, DNN, and FDR).\
 📁 The sub folder [*/causal*](./causal/) contains the Python implementation of DG procedure.
 
 # Example
