@@ -30,16 +30,16 @@
 # Acknowledgement and References
 
 #### :trophy: Some components of this project come from the follwing projects:
-:star: The MGM Java implemention is from [causalMGM](https://github.com/benoslab/causalMGM) and [Tetrad](https://www.ccd.pitt.edu).
-:star: The DeepPINK implementation is from [DeepPINK](https://github.com/younglululu/DeepPINK).
-:star: The FDR filter function is from [DeepKnockoffs](https://github.com/msesia/deepknockoffs).
-:star: The Python implementation of DG algorithm is based on its Java version from [Tetrad](https://www.ccd.pitt.edu).
-:star: The implementation of the PC algorithm used in this project is from [pcalg](https://github.com/keiichishima/pcalg).
+:star: The MGM Java implemention is from [causalMGM](https://github.com/benoslab/causalMGM) and [Tetrad](https://www.ccd.pitt.edu).\
+:star: The DeepPINK implementation is from [DeepPINK](https://github.com/younglululu/DeepPINK).\
+:star: The FDR filter function is from [DeepKnockoffs](https://github.com/msesia/deepknockoffs).\
+:star: The Python implementation of DG algorithm is based on its Java version from [Tetrad](https://www.ccd.pitt.edu).\
+:star: The implementation of the PC algorithm used in this project is from [pcalg](https://github.com/keiichishima/pcalg).\
 
 # Contact
-Please let us know if you have any questions, bug reports, or feedback via the following email:
+:email: Please let us know if you have any questions, bug reports, or feedback via the following email:
 <p align="center">
-    hyp15@pitt.edu
+    :e-mail: hyp15@pitt.edu
 </p>
     
 
