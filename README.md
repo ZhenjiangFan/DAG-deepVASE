@@ -30,15 +30,15 @@
 # Acknowledgement and References
 
 #### Some components of this project come from the follwing projects:
-    The MGM Java implemention is from https://github.com/benoslab/causalMGM and https://www.ccd.pitt.edu/.
-    The DeepPINK implementation is from https://github.com/younglululu/DeepPINK.
-    The FDR filter function is from https://github.com/msesia/deepknockoffs.
-    The Python implementation of DG algorithm is based on its Java version from https://www.ccd.pitt.edu/.
-    The implementation of the PC algorithm used in this project is from https://github.com/keiichishima/pcalg.
+    The MGM Java implemention is from [causalMGM](https://github.com/benoslab/causalMGM){: .btn .btn-primary } and [Tetrad](https://www.ccd.pitt.edu){: .btn .btn-primary }.
+    The DeepPINK implementation is from [DeepPINK](https://github.com/younglululu/DeepPINK){: .btn .btn-primary }.
+    The FDR filter function is from [DeepKnockoffs](https://github.com/msesia/deepknockoffs){: .btn .btn-primary }.
+    The Python implementation of DG algorithm is based on its Java version from [Tetrad](https://www.ccd.pitt.edu){: .btn .btn-primary }.
+    The implementation of the PC algorithm used in this project is from [pcalg](https://github.com/keiichishima/pcalg){: .btn .btn-primary }.
 
 # Contact
 
     Please let us know if you have any questions, bug reports, or feedback via the following email:
-    <center>hyp15@pitt.edu</center>
+    hyp15@pitt.edu{style=text-align:center}
     
 
