@@ -39,6 +39,8 @@
 # Contact
 
     Please let us know if you have any questions, bug reports, or feedback via the following email:
-    hyp15@pitt.edu{style=text-align:center}
+    <p align="center">
+    hyp15@pitt.edu
+    </p>
     
 
