@@ -2,10 +2,11 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 
-# from gsq.ci_tests import ci_test_bin, ci_test_dis
+#from gsq.ci_tests import ci_test_bin, ci_test_dis
 # from gsq.gsq_testdata import bin_data, dis_data
-# from pycit import itest
-# from pycit import citest
+
+#from pycit import itest
+#from pycit import citest
 
 from scipy.stats import chi2_contingency
 from tigramite.independence_tests import ParCorr, GPDC, CMIknn, CMIsymb
@@ -56,16 +57,14 @@ class PC:
                 x = x_values.reshape(x_values.shape[0], 1);
                 y = y_values.reshape(y_values.shape[0], 1);
                 val, pval = self.gpdc.run_test_raw(x,y,z=None);
-                #pval = itest(x_values, y_values,statistic_args={'k': knn_num}#bi_ksg_mi , statistic="bi_ksg_mi"
-                #             , test_args={'statistic': 'bi_ksg_mi','n_jobs': n_jobs,'k_perm':k_perm,'metric':distance_matric});#bi_ksg_mi
+                #pval = itest(x_values, y_values,statistic_args={'k': self.knn_num}#bi_ksg_mi , statistic="bi_ksg_mi, test_args={'statistic': 'bi_ksg_mi','n_jobs': self.n_jobs,'k_perm':self.k_perm,'metric':self.distance_matric});#bi_ksg_mi
                 #print("i test: data type->{} pvalue->{}".format("it-continuous",pval));
             #If the variables are mixed
             else:
                 x = x_values.reshape(x_values.shape[0], 1);
                 y = y_values.reshape(y_values.shape[0], 1);
                 val, pval = self.gpdc.run_test_raw(x,y,z=None);
-                #pval = itest(x_values, y_values,statistic_args={'k': knn_num}#,statistic="mixed_mi"
-                #             , test_args={'statistic': 'mixed_mi','n_jobs': n_jobs,'k_perm':k_perm,'metric':distance_matric});
+                #pval = itest(x_values, y_values,statistic_args={'k': self.knn_num}, test_args={'statistic': 'mixed_mi','n_jobs': self.n_jobs,'k_perm':self.k_perm,'metric':self.distance_matric});
                 #print("i test: data type->{} pvalue->{}".format("it-mixed",pval));
         else:
             #Conditional independence test
@@ -90,8 +89,7 @@ class PC:
                 y = y_values.reshape(y_values.shape[0], 1);
                 z = z_values.reshape(z_values.shape[0], len(z_set));
                 val, pval = self.gpdc.run_test_raw(x,y,z=z);
-                #pval = citest(x_values, y_values, z_values,statistic_args={'k': knn_num}#, statistic="bi_ksg_mi"
-                #              ,test_args={'statistic':'bi_ksg_mi','n_jobs': n_jobs,'k_perm':k_perm,'metric':distance_matric});
+                #pval = citest(x_values, y_values, z_values,statistic_args={'k': self.knn_num},test_args={'statistic':'bi_ksg_mi','n_jobs': self.n_jobs,'k_perm':self.k_perm,'metric':self.distance_matric});
                 #print("ci test: data type->{} pvalue->{}".format("cit-continuous",pval));
             #If the variables are mixed, use mutual information
             else:
@@ -99,8 +97,7 @@ class PC:
                 y = y_values.reshape(y_values.shape[0], 1);
                 z = z_values.reshape(z_values.shape[0], len(z_set));
                 val, pval = self.gpdc.run_test_raw(x,y,z=z);
-                #pval = citest(x_values, y_values, z_values,statistic_args={'k': knn_num}#,statistic="mixed_cmi"
-                #              ,test_args={'statistic':'mixed_cmi','n_jobs':n_jobs,'k_perm':k_perm,'metric':distance_matric});
+                #pval = citest(x_values, y_values, z_values,statistic_args={'k': self.knn_num},test_args={'statistic':'mixed_cmi','n_jobs':self.n_jobs,'k_perm':self.k_perm,'metric':self.distance_matric});
                 #print("ci test: data type->{} pvalue->{}".format("cit-mixed",pval));
             
         return pval;
