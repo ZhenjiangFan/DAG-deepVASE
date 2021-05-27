@@ -1,10 +1,10 @@
 #Install R environment if using conda: #conda install -c r r
 #Load the R files. Use "\\" on Windows and "/" on Linux
-gknockoff_all_path = paste(normalizePath(dirname("gknockoff_all.R")),"/DeepPINK/knockoff/RANK/", "gknockoff_all.R", sep = "")
+gknockoff_all_path = paste(normalizePath(dirname("gknockoff_all.R")),"/DL/knockoff/RANK/", "gknockoff_all.R", sep = "")
 source(gknockoff_all_path)
 #source('/ihome/hpark/zhf16/test/DeepPINK/knockoff/RANK/gknockoff_all.R')
 
-isee_all_path = paste(normalizePath(dirname("isee_all.R")),"/DeepPINK/knockoff/RANK/", "isee_all.R", sep = "")
+isee_all_path = paste(normalizePath(dirname("isee_all.R")),"/DL/knockoff/RANK/", "isee_all.R", sep = "")
 # source('/ihome/hpark/zhf16/test/DeepPINK/knockoff/RANK/isee_all.R')
 source(isee_all_path)
 

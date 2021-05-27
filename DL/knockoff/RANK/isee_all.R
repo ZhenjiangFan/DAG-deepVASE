@@ -194,9 +194,9 @@ slasso <- function(X, y, lam, betap, windows.use = 1, maxite = 50, tol = 1e-2){
   nr = nrow(X)
   nc = ncol(X)
   if (windows.use) {
-    dyn.load("DeepPINK/knockoff/RANK/slasso.dll")
+    dyn.load("DL/knockoff/RANK/slasso.dll")
   } else {
-    dyn.load("DeepPINK/knockoff/RANK/slasso.so")
+    dyn.load("DL/knockoff/RANK/slasso.so")
   }
   # for output variables, use outvar = some argument
   out = .C("slasso", as.vector(as.numeric(X)), as.integer(nr), as.integer(nc), as.double(y), as.double(lam), as.integer(maxite), as.double(tol), betap = as.double(betap))
