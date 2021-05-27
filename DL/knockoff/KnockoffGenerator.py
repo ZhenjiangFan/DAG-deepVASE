@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import scipy
 import os;
-os.environ['R_HOME'] = '/ihome/hpark/zhf16/.conda/envs/env36/lib/R';
-import rpy2.robjects as robjects;
+#os.environ['R_HOME'] = '/ihome/hpark/zhf16/.conda/envs/env36/lib/R';
+#import rpy2.robjects as robjects;
 
 import keras
 from keras.models import Sequential, Model, model_from_json
@@ -20,31 +20,47 @@ from collections import OrderedDict
 
 class KnockoffGenerator:
     
+    ISEE_path = "";
+    
     def __init__(self):
         print("__init__");
         
+    
+    def set_ISEE_path(self,ISEE_path):
+        self.ISEE_path = ISEE_path;
+    def set_R_home(self,R_home):
+        os.environ['R_HOME'] = R_home;
+        import rpy2.robjects as robjects;
+        # load the R instance
+        #r = robjects.r;
+        # load the R instance
+        r = robjects.r;
+        #Load the R script
+        r['source'](self.ISEE_path+os.path.sep+'DL/knockoff/RANK/genKnock.R');
+        #Load the function.
+        self.generateKnockoff = robjects.globalenv['generateKnockoff'];
         
     def ISEE_knockoff(self, folder_path, file_name):
         #print("===");
         dataset = pd.read_csv(folder_path+os.path.sep+file_name);
         feature_list = dataset.columns.tolist();
-        dataset.to_csv(file_name,index=False,header=False);
+        dataset.to_csv(folder_path+os.path.sep+file_name,index=False,header=False);
 
         # print(dataset.shape);
         knockoff_feature_list = [];
         for idx in range(0,dataset.shape[1]):
             knockoff_feature_list.append("K"+str(idx+1));
-        print(feature_list);
-        print(knockoff_feature_list);
+        #print(feature_list);
+        #print(knockoff_feature_list);
         
-        # load the R instance
-        r = robjects.r;
-        #Load the R script
-        r['source']('/ihome/hpark/zhf16/test/DeepPINK/knockoff/RANK/genKnock.R');
-        #Load the function.
-        generateKnockoff = robjects.globalenv['generateKnockoff'];
+        ## load the R instance
+        #r = robjects.r;
+        ##Load the R script
+        #r['source'](self.ISEE_path+os.path.sep+'DL/knockoff/RANK/genKnock.R');
+        ##Load the function.
+        #generateKnockoff = robjects.globalenv['generateKnockoff'];
         #Call the function
-        knockoff_file_name = generateKnockoff(folder_path, file_name, "log", 5, 0, 0);
+        knockoff_file_name = self.generateKnockoff(folder_path, file_name, "log", 5, 0, 0);
         
         #Override the data file with column names
         dataset.columns = feature_list;
@@ -52,8 +68,13 @@ class KnockoffGenerator:
         
         #Save the (original data + knockoff data)
         knockoff_file_name = knockoff_file_name[0];
-        orginal_knockoff_data = pd.read_csv(knockoff_file_name);
+        print(knockoff_file_name);
+        
+        orginal_knockoff_data = pd.read_csv(knockoff_file_name,header=None);
         orginal_knockoff_data.columns = feature_list+knockoff_feature_list;
+        
+        knockoff_file_name = knockoff_file_name.replace("_knockoff.csv","_Omega_knockoff.csv");
+        #knockoff_file_path = folder_path+os.path.sep+knockoff_file_name;
         orginal_knockoff_data.to_csv(knockoff_file_name,index=False);
         
         return knockoff_file_name;
