@@ -15,7 +15,7 @@ class MGM:
     def __init__(self):
         dir_path = os.getcwd();
         #jar path
-        jar_path = os.path.join(dir_path, 'MGM'+os.path.sep+'tetradLite.jar');
+        jar_path = os.path.join(dir_path, 'MGM'+os.path.sep+'tetradLite_likelihood_vals.jar');
         
         # Launch the JVM
         jpype.startJVM();
