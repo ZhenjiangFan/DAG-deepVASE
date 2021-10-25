@@ -46,6 +46,11 @@ class MGM:
 
         # Create MGM Graph object and convert to String
         mgm_graph = mgm.search();
+        
+        likelihood_vals_output_name = file_name.replace(".txt", "_likelihood_vals.txt");
+        likelihood_vals_output_path = folder_path+os.path.sep+likelihood_vals_output_name;
+        mgm.saveLikelihoodVals(likelihood_vals_output_path);
+        
         mgm_output = mgm_graph.toString();
         py_output = str(mgm_output);
         #print(py_output);
