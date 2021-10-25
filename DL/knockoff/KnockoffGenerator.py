@@ -27,8 +27,20 @@ class KnockoffGenerator:
         
     
     def set_ISEE_path(self,ISEE_path):
+        '''
+        Set ISEE path
+        Parameters:
+            the path at where causalDeepVASE package is allocated.
+        '''
         self.ISEE_path = ISEE_path;
     def set_R_home(self,R_home):
+        '''
+        Set R home
+        Parameters:
+            the path at where the R home is installed.
+        '''
+        
+        
         os.environ['R_HOME'] = R_home;
         import rpy2.robjects as robjects;
         # load the R instance
@@ -41,6 +53,15 @@ class KnockoffGenerator:
         self.generateKnockoff = robjects.globalenv['generateKnockoff'];
         
     def ISEE_knockoff(self, folder_path, file_name):
+        '''
+        Generate knockoff data based on ISEE
+        Parameters:
+            data_folder_path: the directory at where the input data is allocated.
+            X_file_name: the file that contains the input data (not including the response variables)
+        Return:
+            the path at where the generated knockoff data is allocated (including both the original data and the knockoff data)
+        '''
+        
         #print("===");
         dataset = pd.read_csv(folder_path+os.path.sep+file_name);
         feature_list = dataset.columns.tolist();
@@ -80,6 +101,14 @@ class KnockoffGenerator:
         return knockoff_file_name;
     
     def Chol_Lu_knockoff(self, folder_path, file_name):
+        '''
+        Parameters:
+            data_folder_path: the directory at where the input file is allocated.
+            X_file_name: the input file. Please note that this file does not include the response variables.
+        Return:
+            The path at where the generated data is allocated, including both the original data and knockoff data.
+        '''
+        
         dataset = pd.read_csv(folder_path+os.path.sep+file_name);
         
         num_samples = dataset.shape[0];
@@ -116,6 +145,16 @@ class KnockoffGenerator:
         data_knockoffs.to_csv(data_knockoff_path,index=False);
         return data_knockoff_path;
     def DNN_knockoff(self, folder_path, file_name, response_file_name):
+        '''
+        Generate knockoff data using DNN
+        Parameters:
+            data_folder_path: the directory at where the input data is allocated.
+            X_file_name: the input data file, not including the response variables.
+            Y_file_name: the input data that only contains the response variales.
+        Return:
+            The path at where the generated data is allocated, including both the original data and knockoff data.
+        '''
+        
         X_data = pd.read_csv(folder_path+os.path.sep+file_name);
         print(X_data.shape);
         
