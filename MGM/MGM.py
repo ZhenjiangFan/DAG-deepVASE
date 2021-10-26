@@ -26,6 +26,19 @@ class MGM:
         
         
     def runMGM(self, folder_path, file_name, lambda_continuous_continuous = 0.3, lamda_continuous_discrete = 0.3, lamda_discrete_discrete = 0.3):
+        '''
+        Run MGM
+        Parameters:
+            data_folder_path: the directory at where the input data is located.
+            XY_file_name: the input data.
+            lambda_continuous_continuous: the panalty value 'lamda' set for the associations whose two variables are continuous.
+            lamda_continuous_discrete: the panalty value 'lamda' set for the associations whose one variable is continuous and the other is discrete.
+            lamda_discrete_discrete: the panalty value 'lamda' set for the associations whose two variables are discrete.
+    
+        Return:
+        mgm_output_file: a file that contains all the selected associations.
+        '''
+        
         #Import MGM classes
         import edu.pitt.csb.mgm;
         from edu.cmu.tetrad.data import DataSet;
