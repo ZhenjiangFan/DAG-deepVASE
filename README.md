@@ -26,6 +26,8 @@
 # Example
 
 #### The source code [*/Example.ipynb*](./Example.ipynb) demonstrates how to use causalDeepVASE.
+(./Procedure_intro.html)
+
 <iframe
        src="./Procedure_intro.html"
        width="90%"
