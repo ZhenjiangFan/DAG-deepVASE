@@ -118,11 +118,9 @@ print(knockoff_file_path);
 Y_file_name = '200p_1000samples_Y.csv';
 X_knockoff_data = pd.read_csv(knockoff_file_path);
 print(X_knockoff_data.shape)
-# X_knockoff_data
 
 #nutrient_data
 original_data_Y = pd.read_csv(data_folder_path+os.path.sep+Y_file_name);
-# original_data_Y
 
 X_values = X_knockoff_data.values;
 Y_values = original_data_Y.values;
@@ -177,7 +175,6 @@ pd.DataFrame(selected_associations).to_csv("data/DNN_selected_associations.csv")
 #Run DG
 #Load data
 X_data = pd.read_csv("X_n1000_p50_rep20.csv");
-# X_data
 Y_data = pd.read_csv('y_si_n1000_p50_rep20.csv');
 #Merge X and Y
 dataset = pd.concat([X_data, Y_data], axis=1, join='inner');
