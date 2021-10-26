@@ -198,7 +198,6 @@ for index,ele in enumerate(col_list):
     col_map_rev[index] = ele;
 print(dataset.shape);
 
-#https://stats.stackexchange.com/questions/13810/threshold-for-correlation-coefficient-to-indicate-statistical-significance-of-a
 # t = dataset.shape[0]**(1/2)
 
 #The data may need to be normalized if neccessary.
@@ -255,6 +254,7 @@ for ele in selected_associations_sum:
 ```python
 
 ```
+
 
 
 
