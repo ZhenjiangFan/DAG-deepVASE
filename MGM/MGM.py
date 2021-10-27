@@ -68,7 +68,7 @@ class MGM:
         py_output = str(mgm_output);
         #print(py_output);
         
-        output_content = py_output.split("\n\nGraph Edges:\n")[1];
+        output_content = py_output.split("\nGraph Edges:")[1];
         #Create a temporary file
         text_file = open("output_content.txt", "w");
         n = text_file.write(output_content);
