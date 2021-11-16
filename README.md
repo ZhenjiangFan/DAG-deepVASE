@@ -197,13 +197,14 @@ print(dataset.shape);
 
 # t = dataset.shape[0]**(1/2)
 
-#The data may need to be normalized if neccessary.
+#Please try to normalize the data if neccessary.
 # from sklearn.preprocessing import MinMaxScaler
 # scaler = MinMaxScaler();
 # scaled_values = scaler.fit_transform(dataset);
 # dataset.loc[:,:] = scaled_values;
 
 #Initialize DG object
+# Please note that different values for the parameter discrete_threshold may produce different outcomes. 
 from causal.DegenerateGaussianScore import DegenerateGaussianScore
 dg = DegenerateGaussianScore(dataset,discrete_threshold=0.2);
 ```
