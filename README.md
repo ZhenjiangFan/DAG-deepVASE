@@ -209,9 +209,11 @@ print(dataset.shape);
 # dataset.loc[:,:] = scaled_values;
 
 #Initialize DG object
-# Please note that different values for the parameter discrete_threshold may produce different outcomes. 
 from causal.DegenerateGaussianScore import DegenerateGaussianScore
-dg = DegenerateGaussianScore(dataset,discrete_threshold=0.2);
+#Please note that different values for the parameter discrete_threshold may produce different outcomes. 
+#Please set the ordinal discrete variables or the variables that should be handled as continuous variables as continuous variables.
+continuous_list = [];
+dg = DegenerateGaussianScore(dataset,continuous_list=continuous_list,discrete_threshold=0.05);
 ```
 
 
