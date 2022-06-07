@@ -15,10 +15,18 @@ class MGM:
     def __init__(self):
         dir_path = os.getcwd();
         #jar path
-        jar_path = os.path.join(dir_path, 'MGM'+os.path.sep+'tetradLite_likelihood_vals.jar');
+        jar_path = os.path.join(dir_path, 'MGM'+os.path.sep+'tetradLite_likelihood_for_all.jar');
         
+        #print(jpype.getDefaultJVMPath());#Test
+        #try:
+        #    import edu.pitt.csb.mgm;
+        #    print("catch.")
+        #except ImportError:
+        #    print("ImportError.");
+            
         # Launch the JVM
         jpype.startJVM();
+            
         #Add the jar to Java class path
         jpype.addClassPath(jar_path);
         print(jar_path);
@@ -87,7 +95,7 @@ class MGM:
         #Shut down the JVM
         jpype.shutdownJVM();
         
-        return associations_output_name;
+        return associations_output_name,likelihood_vals_output_path;
 
 
         
