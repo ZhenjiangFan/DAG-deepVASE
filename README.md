@@ -25,7 +25,7 @@
 
 # Example
 
-#### The source code [*/Example.ipynb*](./Example.ipynb) demonstrates how to use causalDeepVASE.
+#### The source code [*/Example.ipynb*](./Example.ipynb) demonstrates how to use DAG-DeepVASE.
 
 
 #### Import required packages:
@@ -100,18 +100,14 @@ from DL.knockoff.KnockoffGenerator import KnockoffGenerator;
 generator = KnockoffGenerator();
 
 
-# knockoff_file_path = generator.Chol_Lu_knockoff(data_folder_path, X_file_name);
+knockoff_file_path = generator.Chol_Lu_knockoff(data_folder_path, X_file_name);
 
-#If want to generate ISEE Omega knockoff, please set the ISEE code path and R home environment.
-
-generator.set_ISEE_path("/ihome/hpark/zhf16/causalDeepVASE/");
-
-generator.set_R_home('/ihome/hpark/zhf16/.conda/envs/env36/lib/R');
-
-knockoff_file_path = generator.ISEE_knockoff(data_folder_path, X_file_name);
+##If want to generate ISEE Omega knockoff, please set the ISEE code path and R home environment.
+#generator.set_ISEE_path("/ihome/hpark/zhf16/causalDeepVASE/");
+#generator.set_R_home('/ihome/hpark/zhf16/.conda/envs/env36/lib/R');
+#knockoff_file_path = generator.ISEE_knockoff(data_folder_path, X_file_name);
 
 # Y_file_name = '200p_1000samples_Y.csv';
-
 # knockoff_file_path = generator.DNN_knockoff(data_folder_path, X_file_name,Y_file_name);
 
 print("The newly generated knockoff file is named as:")
