@@ -26,18 +26,25 @@ class DegenerateGaussianScore:
     
     is_var_discrete_map = {};
     
+    continuous_list = [];
+    
     discrete_threshold = 0.02;
     
-    def __init__(self, data, discrete_threshold=0.2):
+    def __init__(self, data, continuous_list=[], discrete_threshold=0.2):
         dataframe = data;
         self.variables = dataframe.columns.tolist();
         self.N = dataframe.shape[0];
         self.embedding = {};
+        self.continuous_list = continuous_list;
         self.discrete_threshold=discrete_threshold;
         
         is_var_discrete_map = {};
         for var in dataframe.columns:
-            is_var_discrete_map[var] = 1.*dataframe[var].nunique()/dataframe[var].count() < self.discrete_threshold;
+            if var in self.continuous_list:
+                is_var_discrete_map[var] = False;
+                print(var);
+            else:
+                is_var_discrete_map[var] = 1.*dataframe[var].nunique()/dataframe[var].count() < self.discrete_threshold;
         #print(is_var_discrete_map);
         
         A = [];
