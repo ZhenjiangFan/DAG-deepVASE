@@ -69,6 +69,12 @@ Return:
     mgm_output_file: a file that contains all the selected associations.
 '''
 mgm_output_file = mgm.runMGM(data_folder_path, XY_file_name,lambda_continuous_continuous = 0.3, lamda_continuous_discrete = 0.3, lamda_discrete_discrete = 0.3);
+"""
+MGM use the Python package Jpype to call MGM's Java implementation.
+According to Jpype documents, it says "Due to limitations in the JPype, 
+it is not possible to restart the JVM after being terminated."
+Therefore, please restart the Python kernel if you enter an OSError ("OSError: JVM cannot be restarted").
+"""
 mgm_output_file_path = data_folder_path+os.path.sep+mgm_output_file[0];
 print("MGM's output was save as the following file:");
 print(mgm_output_file_path);
