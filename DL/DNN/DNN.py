@@ -20,17 +20,16 @@ import os
 class DNN:
     
     num_epochs = 20;
-    batch_size = 30;
+    batch_size = 10;
     filterNum = 1;
 
     bias = True;
     activation='relu';
     output_layer_activation = 'linear'
-    iterNum = 50;
     
     def __init__(self):
         print("__init__");
-    def __init__(self,num_epochs = 20, batch_size=30, filterNum=1, bias=True, activation='relu', output_layer_activation='linear', iterNum = 50):
+    def __init__(self,num_epochs = 20, batch_size=30, filterNum=1, bias=True, activation='relu', output_layer_activation='linear'):
         print("__init__parameters");
         self.num_epochs=num_epochs;
         self.batch_size=batch_size;
@@ -38,7 +37,6 @@ class DNN:
         self.bias = bias;
         self.activation = activation;
         self.output_layer_activation=output_layer_activation;
-        self.iterNum = iterNum;
         
     def show_layer_info(self, layer_name, layer_out):
         print('[layer]: %s\t[shape]: %s \n' % (layer_name,str(layer_out.get_shape().as_list())))
