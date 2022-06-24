@@ -23,24 +23,12 @@ class KnockoffGenerator:
     ISEE_path = "";
     
     def __init__(self):
-        print("__init__");
+        print("KnockoffGenerator__init__");
         
     
     def set_ISEE_path(self,ISEE_path):
-        '''
-        Set ISEE path
-        Parameters:
-            the path at where causalDeepVASE package is allocated.
-        '''
         self.ISEE_path = ISEE_path;
     def set_R_home(self,R_home):
-        '''
-        Set R home
-        Parameters:
-            the path at where the R home is installed.
-        '''
-        
-        
         os.environ['R_HOME'] = R_home;
         import rpy2.robjects as robjects;
         # load the R instance
@@ -52,20 +40,11 @@ class KnockoffGenerator:
         #Load the function.
         self.generateKnockoff = robjects.globalenv['generateKnockoff'];
         
-    def ISEE_knockoff(self, folder_path, file_name):
-        '''
-        Generate knockoff data based on ISEE
-        Parameters:
-            data_folder_path: the directory at where the input data is allocated.
-            X_file_name: the file that contains the input data (not including the response variables)
-        Return:
-            the path at where the generated knockoff data is allocated (including both the original data and the knockoff data)
-        '''
-        
+    def ISEEKnockoff(self, folder_path, file_name,sep="\t"):
         #print("===");
-        dataset = pd.read_csv(folder_path+os.path.sep+file_name);
+        dataset = pd.read_csv(folder_path+os.path.sep+file_name,sep=sep);
         feature_list = dataset.columns.tolist();
-        dataset.to_csv(folder_path+os.path.sep+file_name,index=False,header=False);
+        dataset.to_csv(folder_path+os.path.sep+file_name,index=False,header=False,sep=sep);
 
         # print(dataset.shape);
         knockoff_feature_list = [];
@@ -81,52 +60,50 @@ class KnockoffGenerator:
         ##Load the function.
         #generateKnockoff = robjects.globalenv['generateKnockoff'];
         #Call the function
-        knockoff_file_name = self.generateKnockoff(folder_path, file_name, "log", 5, 0, 0);
+        knockoff_file_name = self.generateKnockoff(folder_path, file_name, "log", 5, 0, 0,sep=sep);
         
         #Override the data file with column names
         dataset.columns = feature_list;
-        dataset.to_csv(folder_path+os.path.sep+file_name,index=False);
+        dataset.to_csv(folder_path+os.path.sep+file_name,index=False,sep=sep);
         
         #Save the (original data + knockoff data)
         knockoff_file_name = knockoff_file_name[0];
         print(knockoff_file_name);
         
-        orginal_knockoff_data = pd.read_csv(knockoff_file_name,header=None);
+        orginal_knockoff_data = pd.read_csv(knockoff_file_name,header=None,sep=sep);
         orginal_knockoff_data.columns = feature_list+knockoff_feature_list;
         
-        knockoff_file_name = knockoff_file_name.replace("_knockoff.csv","_Omega_knockoff.csv");
+        if knockoff_file_name.endswith("_knockoff.csv"):
+            knockoff_file_name = knockoff_file_name.replace("_knockoff.csv","_Omega_knockoff.csv");
+        else:
+            knockoff_file_name = knockoff_file_name.replace("_knockoff.txt","_Omega_knockoff.txt");
         #knockoff_file_path = folder_path+os.path.sep+knockoff_file_name;
-        orginal_knockoff_data.to_csv(knockoff_file_name,index=False);
+        orginal_knockoff_data.to_csv(knockoff_file_name,index=False,sep=sep);
         
         return knockoff_file_name;
     
-    def Chol_Lu_knockoff(self, folder_path, file_name):
-        '''
-        Parameters:
-            data_folder_path: the directory at where the input file is allocated.
-            X_file_name: the input file. Please note that this file does not include the response variables.
-        Return:
-            The path at where the generated data is allocated, including both the original data and knockoff data.
-        '''
-        
-        dataset = pd.read_csv(folder_path+os.path.sep+file_name);
+    def CholLuKnockoff(self, folder_path, file_name,sep="\t"):
+        dataset = pd.read_csv(folder_path+os.path.sep+file_name,sep=sep);
         
         num_samples = dataset.shape[0];
         num_variables = dataset.shape[1];
         feature_names = dataset.columns.tolist();
         data_values = dataset.values;
-        
-        cov = np.corrcoef(data_values.T);#corrcoef cov
+        print(data_values.shape);
+        cov = np.corrcoef(data_values.T);
         #If the covariance matrix is positvely defined, use cholesky; else, use lu.
         if np.all(np.linalg.eigvals(cov) > 0):
-            L = np.linalg.cholesky(cov);
+            try:
+                L = np.linalg.cholesky(cov);
+            except np.linalg.LinAlgError:
+                L = scipy.linalg.lu(cov)[0];
         else:
             L = scipy.linalg.lu(cov)[0];
-        print(L.shape);
+        #print(L.shape);
         
         uncorrelated = np.random.standard_normal((num_samples,num_variables));
 
-        print(uncorrelated.shape);
+        #print(uncorrelated.shape);
         mean = [0]*num_variables;
         
         correlated = np.dot(L, uncorrelated.T);# + np.array(mean).reshape(num_variables, 1)
@@ -140,21 +117,15 @@ class KnockoffGenerator:
         
         data_knockoffs = pd.concat([dataset, knockoffs], axis=1, join='inner');
         
-        file_name = file_name.replace(".csv","_chol_lu_knockoff.csv");
+        if file_name.endswith(".csv"):
+            file_name = file_name.replace(".csv","_chol_lu_knockoff.csv");
+        else:
+            file_name = file_name.replace(".txt","_chol_lu_knockoff.txt");
+        
         data_knockoff_path = folder_path+os.path.sep+file_name;
-        data_knockoffs.to_csv(data_knockoff_path,index=False);
+        data_knockoffs.to_csv(data_knockoff_path,index=False,sep='\t');
         return data_knockoff_path;
     def DNN_knockoff(self, folder_path, file_name, response_file_name):
-        '''
-        Generate knockoff data using DNN
-        Parameters:
-            data_folder_path: the directory at where the input data is allocated.
-            X_file_name: the input data file, not including the response variables.
-            Y_file_name: the input data that only contains the response variales.
-        Return:
-            The path at where the generated data is allocated, including both the original data and knockoff data.
-        '''
-        
         X_data = pd.read_csv(folder_path+os.path.sep+file_name);
         print(X_data.shape);
         
