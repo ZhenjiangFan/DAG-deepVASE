@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import math as math
 from scipy.linalg import lu,det
+import networkx as nx
 
 
 class DegenerateGaussianScore:
@@ -146,3 +147,37 @@ class DegenerateGaussianScore:
         result = lik + 2*struct_prior - dof*self.penaltyDiscount*np.log(self.N);
         #print(result)
         return result;
+    
+    def removeCycles(causalGraph):
+        #print(causalGraph.edges());
+        cycyles = list(nx.simple_cycles(causalGraph));
+        for cycle in cycyles:
+            source_node = cycle[0];
+            target_node_index = 1;
+
+            marked_source_node = "";
+            marked_target_node = "";
+            marked_weight = 0;
+
+            while (target_node_index<len(cycle)):
+                target_node = cycle[target_node_index];
+                weight = causalGraph.get_edge_data(source_node,target_node)['weight'];
+                #print(weight);
+                if (marked_source_node =="" and marked_target_node=="") or marked_weight<weight:
+                    marked_weight = weight;
+                    marked_source_node = source_node;
+                    marked_target_node = target_node;
+
+                source_node = target_node;
+                target_node_index=target_node_index+1;
+            target_node = cycle[0];
+            weight = causalGraph.get_edge_data(source_node,target_node)['weight'];
+            #print(weight);
+            if marked_weight<weight:
+                marked_weight = weight;
+                marked_source_node = source_node;
+                marked_target_node = target_node;
+            #Delete the node with smallest weight
+            causalGraph.remove_edge(source_node,target_node);
+        #print(causalGraph.edges());
+        return causalGraph;
