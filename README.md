@@ -26,6 +26,7 @@
 # Example
 
 #### The source code [*/Example.ipynb*](./Example.ipynb) demonstrates how to use DAG-DeepVASE.
+#### The source code [*/ExampleForDataWithNoTarget.ipynb*](./ExampleForDataWithNoTarget.ipynb) demonstrates how to use DAG-DeepVASE when the dataset does not have a target variable.
 
 
 #### Import required packages:
