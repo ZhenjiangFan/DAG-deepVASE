@@ -35,7 +35,7 @@ class FDR_control:
     
     def controlFilter(self, X_data_path, W_result_path, offset=1, q=0.05):
         
-        X_data = pd.read_csv(X_data_path);
+        X_data = pd.read_csv(X_data_path,sep="\t");
         feature_list = X_data.columns.tolist();
         number_of_features = X_data.shape[1];
         
@@ -61,6 +61,7 @@ class FDR_control:
     
         selected_features = [];
         for index in range(0,number_of_features):
+            #print("Original: {}, Knockoff: {}".format(original_result_list[index],knockoff_result_list[index]))
             stat = abs(original_result_list[index])-abs(knockoff_result_list[index]);
             if stat>threshold:
                 selected_features.append(feature_list[index]);   
