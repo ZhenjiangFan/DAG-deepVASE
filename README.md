@@ -4,7 +4,7 @@
 ####
 
 # Test DAG-DeepVASE using a Docker container
-1. Download docker [here](https://docs.docker.com/get-docker/) and and install it.
+1. Download docker [here](https://docs.docker.com/get-docker/) and install it.
 2. Download the docker image.
 ```python
 zhenjiangfan/dagdeepvase:latest
