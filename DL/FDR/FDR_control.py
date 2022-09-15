@@ -64,7 +64,7 @@ class FDR_control:
             #print("Original: {}, Knockoff: {}".format(original_result_list[index],knockoff_result_list[index]))
             stat = abs(original_result_list[index])-abs(knockoff_result_list[index]);
             if stat>threshold:
-                selected_features.append(feature_list[index]);   
+                selected_features.append((feature_list[index],stat));   
             
         #print(len(selected_features));
         return selected_features;
