@@ -60,7 +60,7 @@ import os
 
 ```python
 XY_file_name = "200p_1000samples_XY.txt";
-data_folder_path = "/ihome/hpark/zhf16/causalDeepVASE/data";
+data_folder_path = "data";
 '''
 Run MGM
 Note: MGM was implemented in Java and the following Python APIs call the Java implementation.
@@ -121,8 +121,8 @@ generator = KnockoffGenerator();
 knockoff_file_path = generator.Chol_Lu_knockoff(data_folder_path, X_file_name);
 
 ##If want to generate ISEE Omega knockoff, please set the ISEE code path and R home environment.
-#generator.set_ISEE_path("/ihome/hpark/zhf16/causalDeepVASE/");
-#generator.set_R_home('/ihome/hpark/zhf16/.conda/envs/env36/lib/R');
+#generator.set_ISEE_path("absolute_path_to_DAG-DeepVASE_directory");#e.g. /ihome/user/causalDeepVASE/
+#generator.set_R_home('absolute_path_to_R_home');#The full path to the R installation, e.g./ihome/user/.conda/envs/env36/lib/R
 #knockoff_file_path = generator.ISEE_knockoff(data_folder_path, X_file_name);
 
 # Y_file_name = '200p_1000samples_Y.csv';
