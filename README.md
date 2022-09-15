@@ -1,6 +1,6 @@
 
 # Introduction
-
+Directed Acyclic Graphs using deep-learning VAriable SElection (DAG-deepVASE) is the first computational method that learns both linear and nonlinear causal relations and estimates the effect size using a deep-neural network approach coupled with the knockoff framework. Identifying nonlinear causal relations and estimating their effect size help understand the complex disease pathobiology.
 ####
 
 # Test DAG-DeepVASE using a Docker container
