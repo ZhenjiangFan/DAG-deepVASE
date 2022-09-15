@@ -125,11 +125,11 @@ class KnockoffGenerator:
         data_knockoff_path = folder_path+os.path.sep+file_name;
         data_knockoffs.to_csv(data_knockoff_path,index=False,sep='\t');
         return data_knockoff_path;
-    def DNN_knockoff(self, folder_path, file_name, response_file_name):
-        X_data = pd.read_csv(folder_path+os.path.sep+file_name);
+    def DNN_knockoff(self, folder_path, file_name, response_file_name,sep="\t"):
+        X_data = pd.read_csv(folder_path+os.path.sep+file_name,sep=sep);
         print(X_data.shape);
         
-        Y_data = pd.read_csv(folder_path+os.path.sep+response_file_name);
+        Y_data = pd.read_csv(folder_path+os.path.sep+response_file_name,sep=sep);
         print(Y_data.shape);
         n_samples = X_data.shape[0];
         n_features = X_data.shape[1];
@@ -165,5 +165,5 @@ class KnockoffGenerator:
         
         file_name = file_name.replace(".csv","_DNN_knockoff.csv");
         data_knockoff_path = folder_path+os.path.sep+file_name;
-        data_knockoffs.to_csv(data_knockoff_path,index=False);
+        data_knockoffs.to_csv(data_knockoff_path,index=False,sep='\t');
         return data_knockoff_path;
