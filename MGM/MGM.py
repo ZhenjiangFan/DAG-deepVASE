@@ -23,7 +23,8 @@ class MGM:
         #    print("catch.")
         #except ImportError:
         #    print("ImportError.");
-            
+        
+        #if not jpype.isJVMStarted():
         # Launch the JVM
         jpype.startJVM();
             
@@ -87,15 +88,15 @@ class MGM:
         associations = associations[["Feature1","Feature2"]];
         
         associations_output_name = file_name.replace(".txt", "_MGM_associations.csv");
-        
-        associations.to_csv(folder_path+os.path.sep+associations_output_name);
+        associations_output_path = folder_path+os.path.sep+associations_output_name;
+        associations.to_csv(associations_output_path);
         #Remove the temporary file.
         os.remove("output_content.txt");
         
         #Shut down the JVM
         jpype.shutdownJVM();
         
-        return associations_output_name,likelihood_vals_output_path;
+        return associations_output_path,likelihood_vals_output_path;
 
 
         
