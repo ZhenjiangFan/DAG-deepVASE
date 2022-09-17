@@ -5,17 +5,8 @@ import os;
 #os.environ['R_HOME'] = '/ihome/hpark/zhf16/.conda/envs/env36/lib/R';
 #import rpy2.robjects as robjects;
 
-import keras
-from keras.models import Sequential, Model, model_from_json
-from keras.layers import Input, Dense, Dropout, BatchNormalization, merge#keras.layers 
-from keras import backend as K
-from keras import regularizers
 
-import deeplift
-import deeplift.conversion.keras_conversion as kc
-import deeplift.blobs as blobs
-from deeplift.blobs import NonlinearMxtsMode
-from deeplift.backend import function as compile_func
+
 from collections import OrderedDict
 
 class KnockoffGenerator:
@@ -126,6 +117,18 @@ class KnockoffGenerator:
         data_knockoffs.to_csv(data_knockoff_path,index=False,sep='\t');
         return data_knockoff_path;
     def DNN_knockoff(self, folder_path, file_name, response_file_name,sep="\t"):
+        import keras
+        from keras.models import Sequential, Model, model_from_json
+        from keras.layers import Input, Dense, Dropout, BatchNormalization, merge#keras.layers 
+        from keras import backend as K
+        from keras import regularizers
+
+        import deeplift
+        import deeplift.conversion.keras_conversion as kc
+        import deeplift.blobs as blobs
+        from deeplift.blobs import NonlinearMxtsMode
+        from deeplift.backend import function as compile_func
+
         X_data = pd.read_csv(folder_path+os.path.sep+file_name,sep=sep);
         print(X_data.shape);
         
