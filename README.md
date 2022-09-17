@@ -55,20 +55,20 @@ import numpy as np
 import os
 ```
 
-#### Run MGM to get direct or linear associations
+#### Run MGM to get linear associations
 
 
 ```python
-XY_file_name = "200p_1000samples_XY.txt";
-data_folder_path = "data";
+XYDataFileName = "XY_n1000_p100_rep20.txt";
+dataFolderPath = "data/simData";
 '''
 Run MGM
 Note: MGM was implemented in Java and the following Python APIs call the Java implementation.
 Please restart the Python program after encountering a JVM problem.
-The input data file should be ".txt" format and should also include the response variables.
+The format of the input data file must be ".txt" in which columns are separated by "\t" and it should also include the response variables.
 Here is what the input data should look like:
-X1 X2 ... Xp Y1 ... Yq
-1  1  ... 1  1  ... 1
+X1 X2 ... Xp
+1  1  ... 1
 '''
 # import the MGM package
 from MGM.MGM import MGM
@@ -77,59 +77,50 @@ mgm = MGM();
 '''
 Run MGM
 Parameters:
-    data_folder_path: the directory at where the input data is located.
-    XY_file_name: the input data.
-    lambda_continuous_continuous: the panalty value 'lamda' set for the associations whose two variables are continuous.
-    lamda_continuous_discrete: the panalty value 'lamda' set for the associations whose one variable is continuous and the other is discrete.
-    lamda_discrete_discrete: the panalty value 'lamda' set for the associations whose two variables are discrete.
+    dataFolderPath: the directory that stores the input data.
+    DataFileName: the name of the input data.
+    lambda_continuous_continuous: the panalty value 'lambda' set for the associations whose two end variables are continuous.
+    lamda_continuous_discrete: the panalty value 'lambda' set for the associations whose one end variable is continuous and the other is discrete.
+    lamda_discrete_discrete: the panalty value 'lambda' set for the associations whose two end variables are discrete.
     
 Return:
-    mgm_output_file: a file that contains all the selected associations.
+    mgmOutputFile: a tuple, where the first file contains all the selected associations and the second file contains the corresponding likelihoods.
 '''
-mgm_output_file = mgm.runMGM(data_folder_path, XY_file_name,lambda_continuous_continuous = 0.3, lamda_continuous_discrete = 0.3, lamda_discrete_discrete = 0.3);
+mgmOutputFile = mgm.runMGM(dataFolderPath, XYDataFileName,lambda_continuous_continuous = 0.3, lamda_continuous_discrete = 0.3, lamda_discrete_discrete = 0.3);
 """
-MGM use the Python package Jpype to call MGM's Java implementation.
+MGM uses the Python package Jpype to call MGM's Java implementation.
 According to Jpype documents, it says "Due to limitations in the JPype, 
 it is not possible to restart the JVM after being terminated."
-Therefore, please restart the Python kernel if you enter an OSError ("OSError: JVM cannot be restarted").
+Therefore, please restart the Python kernel if you encounter an OSError (i.e., "OSError: JVM cannot be restarted").
 """
-mgm_output_file_path = data_folder_path+os.path.sep+mgm_output_file[0];
-print("MGM's output was save as the following file:");
-print(mgm_output_file_path);
-print("The likelihood values were save as the following file:");
-likelihood_file_path = data_folder_path+os.path.sep+mgm_output_file[1];
-print(likelihood_file_path);
+print("MGM's output was saved as the following file:");
+print(mgmOutputFile[0]);
+print("The likelihood values were saved as the following file:");
+print(mgmOutputFile[1]);
 ```
 
-#### Run DNN to get indirect or nonlinear associations
+#### Run DNN to get nonlinear associations
 ##### Generate knockoff data
 
 
 ```python
-X_file_name = "200p_1000samples_X.csv";
 '''
-#Generate knockoff data using one of three methods: ISEE Omega, DNN, and Cholesky_LU.
-#Recommended: ISEE Omega or Cholesky_LU.
+#Generate knockoff data using one of two methods: ISEE Omega and Cholesky_LU.
 The code for generating ISEE Omega knockoff is implemented using R. Please make sure your computer has R installed.
 '''
-#Import the package
 from DL.knockoff.KnockoffGenerator import KnockoffGenerator;
-#Initialize the knockoff generator object
 generator = KnockoffGenerator();
 
+DataFileName = "X_n1000_p100_rep20.txt";
+# knockoffFilePath = generator.CholLuKnockoff(dataFolderPath, DataFileName,sep="\t");
 
-knockoff_file_path = generator.Chol_Lu_knockoff(data_folder_path, X_file_name);
+#If want to generate ISEE Omega knockoff, please set the ISEE code path and R home environment.
+generator.set_ISEE_path("/absolute_path_of_DAG_DeepVASE");#/home/user/DAG_DeepVASE/
+generator.set_R_home('absolute_path_to_directory_where_r_is_installed');#e.g.,/home/user/lib/R
+knockoffFilePath = generator.ISEEKnockoff(dataFolderPath, DataFileName,sep="\t");
 
-##If want to generate ISEE Omega knockoff, please set the ISEE code path and R home environment.
-#generator.set_ISEE_path("absolute_path_to_DAG-DeepVASE_directory");#e.g. /ihome/user/causalDeepVASE/
-#generator.set_R_home('absolute_path_to_R_home');#The full path to the R installation, e.g./ihome/user/.conda/envs/env36/lib/R
-#knockoff_file_path = generator.ISEE_knockoff(data_folder_path, X_file_name);
-
-# Y_file_name = '200p_1000samples_Y.csv';
-# knockoff_file_path = generator.DNN_knockoff(data_folder_path, X_file_name,Y_file_name);
-
-print("The newly generated knockoff file is named as:")
-print(knockoff_file_path);
+print("The newly generated knockoff file is named as:");
+print(knockoffFilePath);
 ```
 
 ##### Run DNN
@@ -138,44 +129,37 @@ print(knockoff_file_path);
 ```python
 ''''''
 # After generating the knockoff data, run DNN
-Y_file_name = '200p_1000samples_Y.csv';
-X_knockoff_data = pd.read_csv(knockoff_file_path);
-print(X_knockoff_data.shape)
+XKnockoffData = pd.read_csv(knockoffFilePath,sep="\t");
 
-#nutrient_data
-original_data_Y = pd.read_csv(data_folder_path+os.path.sep+Y_file_name);
+YDataFileName = 'y_si_n1000_p100_rep20.txt';
+Ydata = pd.read_csv(dataFolderPath+os.path.sep+YDataFileName,sep="\t");
 
-X_values = X_knockoff_data.values;
-Y_values = original_data_Y.values;
+XKValues = XKnockoffData.values;
+YValues = Ydata.values;
     
-pVal = int(X_values.shape[1] / 2);
-n = X_values.shape[0];
-print(X_values.shape);
-print(Y_values.shape);
-print(pVal);
+pNum = int(XKValues.shape[1] / 2);
+n = XKValues.shape[0];
     
-X_origin = X_values[:, 0:pVal];
-X_knockoff = X_values[:, pVal:];
+XOrigin = XKValues[:, 0:pNum];
+knockoff = XKValues[:, pNum:];
 
-x3D_train = np.zeros((n, pVal, 2));
-x3D_train[:, :, 0] = X_origin;
-x3D_train[:, :, 1] = X_knockoff;
-label_train = Y_values;
-    
-coeff = 0.05 * np.sqrt(2.0 * np.log(pVal) / n);
-
-n_outputs = original_data_Y.shape[1];
+X3DTrain = np.zeros((n, pNum, 2));
+X3DTrain[:, :, 0] = XOrigin;
+X3DTrain[:, :, 1] = knockoff;
+labelTrain = YValues;
+coeff = 0.05 * np.sqrt(2.0 * np.log(pNum) / n);
+nOutputs = Ydata.shape[1];
 
 #Save the DNN output to the following directory.
-result_dir = 'data/DNN_result/';
-if not os.path.exists(result_dir):
-    os.makedirs(result_dir);
+resultDir = dataFolderPath+os.path.sep+'DNN_result/';
+if not os.path.exists(resultDir):
+    os.makedirs(resultDir);
     
 from DL.DNN.DNN import DNN;
 dnn = DNN();
-model = dnn.build_DNN(pVal, n_outputs, coeff);
-callback = DNN.Job_finish_Callback(result_dir,pVal);
-dnn.train_DNN(model, x3D_train, label_train,callback);
+model = dnn.build_DNN(pNum, nOutputs, coeff);
+callback = DNN.Job_finish_Callback(resultDir,pNum);
+dnn.train_DNN(model, X3DTrain, labelTrain,callback);
 ```
 
 ##### Apply FDR control
@@ -185,29 +169,25 @@ dnn.train_DNN(model, x3D_train, label_train,callback);
 #Apply FDR control to DNN result
 from DL.FDR.FDR_control import FDR_control;
 control = FDR_control();
-selected_features = control.controlFilter(data_folder_path +os.path.sep+ X_file_name, "/ihome/hpark/zhf16/causalDeepVASE/data/DNN_result", offset=1, q=0.05);
+XDataFileName = "X_n1000_p100_rep20.txt";
+selected_features = control.controlFilter(dataFolderPath +os.path.sep+ XDataFileName, resultDir, offset=1, q=0.05);
 #Save the selected associations
 selected_associations = [];
 for ele in selected_features:
-    selected_associations.append({"Feature1":ele,"Feature2":"Y"});
-pd.DataFrame(selected_associations).to_csv("data/DNN_selected_associations.csv")
+    selected_associations.append({"Feature1":ele[0],"Feature2":"Y"});
+pd.DataFrame(selected_associations).to_csv(dataFolderPath +os.path.sep+"DNN_selected_associations.csv");
 ```
 
 
 ```python
-#Run DG
-#Load data
-X_data = pd.read_csv("X_n1000_p50_rep20.csv");
-Y_data = pd.read_csv('y_si_n1000_p50_rep20.csv');
-#Merge X and Y
-dataset = pd.concat([X_data, Y_data], axis=1, join='inner');
-print(dataset.shape);
+# Run DG
+# Load data
+dataset = pd.read_csv(dataFolderPath+os.path.sep+XYDataFileName,sep="\t");
 
 #Calculate the covariance matrix
 cov_mat = dataset.cov();
 corr_inv = np.linalg.inv(cov_mat)
 corr_inv = pd.DataFrame(data=corr_inv, index=cov_mat.index,columns=cov_mat.columns)
-# corr_inv.head(2)
 
 #Convert the columns to their numerical representations
 col_map = {};
@@ -218,9 +198,7 @@ for index,ele in enumerate(col_list):
     col_map_rev[index] = ele;
 print(dataset.shape);
 
-# t = dataset.shape[0]**(1/2)
-
-#Please try to normalize the data if neccessary.
+#The data may need to be normalized if neccessary.
 # from sklearn.preprocessing import MinMaxScaler
 # scaler = MinMaxScaler();
 # scaled_values = scaler.fit_transform(dataset);
@@ -228,49 +206,84 @@ print(dataset.shape);
 
 #Initialize DG object
 from causal.DegenerateGaussianScore import DegenerateGaussianScore
-#Please note that different values for the parameter discrete_threshold may produce different outcomes. 
-#Please set the ordinal discrete variables or the variables that should be handled as continuous variables as continuous variables.
-continuous_list = [];
-dg = DegenerateGaussianScore(dataset,continuous_list=continuous_list,discrete_threshold=0.05);
+dg = DegenerateGaussianScore(dataset,discrete_threshold=0.2);
+
 ```
 
 
 ```python
-selected_associations_sum = [];
+selectedAssociationsSum = [];
 #Load both MGM-identified and DNN associations
-MGM_associations = pd.read_csv("X_n1000_p50_rep20_MGM_associations.csv");
-for index,row in MGM_associations.iterrows():
-    if row["Feature1"]=="Y" or row["Feature2"]=="Y":
-        print("Found.");
-        selected_associations_sum.append({"Feature1":row["Feature1"],"Feature2":row["Feature2"]});
+MGMAssociations = pd.read_csv(mgmOutputFile[0]);
+for index,row in MGMAssociations.iterrows():
+    f1 = row["Feature1"];
+    f2 = row["Feature2"];
+    if f1=="Y" or f2=="Y":
+        tempList = [f1,f2];
+        tempList.sort();
+        tempStr = tempList[0]+"___"+tempList[1];
+        if tempStr not in selectedAssociationsSum:
+            selectedAssociationsSum.append(tempStr);
         
-DNN_associations = pd.read_csv("DNN_selected_associations.csv");
-for index,row in DNN_associations.iterrows():
-    selected_associations_sum.append({"Feature1":row["Feature1"],"Feature2":row["Feature2"]});
+DNNAssociations = pd.read_csv(dataFolderPath +os.path.sep+"DNN_selected_associations.csv");
+for index,row in DNNAssociations.iterrows():
+    f1 = row["Feature1"];
+    f2 = row["Feature2"];
+    tempList = [f1,f2];
+    tempList.sort();
+    tempStr = tempList[0]+"___"+tempList[1];
+    if tempStr not in selectedAssociationsSum:
+        selectedAssociationsSum.append(tempStr);
 ```
 
 
 ```python
-for ele in selected_associations_sum:
-    f1 = ele["Feature1"];
-    f2 = ele["Feature2"];
+import networkx as nx
+#Calculate causal directions
+causalGraph = nx.DiGraph();
+for ele in selectedAssociationsSum:
+    strs = ele.split("___");
+    f1 = strs[0];
+    f2 = strs[1];
     
     inv_val = abs(corr_inv[f1][f2]);
-    if inv_val<0.0:
+    if inv_val<=0.0:
         continue;
-    
+
     n1_idx = col_map[f1];
     n2_idx = col_map[f2];
-    
+
     s1 = dg.localScore(n1_idx,{n2_idx});
     s2 = dg.localScore(n2_idx,{n1_idx});
-    
+
     if s1<s2:
         print("Cause: "+f2+", Effect: "+f1);
+        dif = s2-s1;
+        causalGraph.add_edge(f2, f1, weight=dif);
     elif s1>s2:
         print("Cause: "+f1+", Effect: "+f2);
+        dif = s1-s2;
+        causalGraph.add_edge(f1, f2, weight=dif);
     else:
         print("Same score.");
+        
+#Remove cycles
+causalGraph = dg.removeCycles(causalGraph);
+
+import scipy.stats
+#Identify if a causal relationship is positive or negative.
+edgeList = [];
+for edge in causalGraph.edges():
+    cause = edge[0];
+    effect = edge[1];
+    effectSize = np.log(causalGraph.get_edge_data(cause,effect)['weight']);
+    corr = scipy.stats.pearsonr(dataset[cause].values,dataset[effect].values)[0];
+    if corr>0:
+        edgeList.append({"Cause":cause,"Effect":effect,"EffectSize":effectSize,"CauseDirection":"Positive"});
+    elif corr == 0:
+        edgeList.append({"Cause":cause,"Effect":effect,"EffectSize":effectSize,"CauseDirection":"Undefined"});
+    else:
+        edgeList.append({"Cause":cause,"Effect":effect,"EffectSize":effectSize,"CauseDirection":"Negative"});
 ```
 
 
