@@ -17,6 +17,10 @@ docker run -it --name dagdeepvase dagdeepvase
 ```python
 python3 ExampleForDataWithTarget.py
 ```
+4. Test DAG-DeepVASE using the TCGA BRCA RNA-seq data:
+```python
+python3 ExampleUsingBRCAData.py
+```
 
 #### 
 
