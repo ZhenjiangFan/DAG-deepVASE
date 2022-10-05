@@ -212,12 +212,12 @@ for index,ele in enumerate(colList):
     col_map_rev[index] = ele;
 
 #Normalize the dataset if neccesary.
-''''''
+'''
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler();
 scaled_values = scaler.fit_transform(dataset);
 dataset.loc[:,:] = scaled_values;
-
+'''
 
 #Initialize DG object
 #Please set the ordinal discrete variables or the variables that should be handled as continuous variables as continuous variables.
