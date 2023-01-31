@@ -1,0 +1,8 @@
+python DAG-GNN/src/train.py --graph_linear_type=1  --data_type="real" --data_dir="C://Users//zhenjiang fan//Documents//workspace//Pythonworkspace//CausalMethodRevision/" --data_filename='X.csv'
+
+python DAG-GNN/src/train.py --graph_linear_type=linear
+
+python notears/notears/linear.py
+
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/ihome/hpark/zhf16/.conda/envs/py39/lib
