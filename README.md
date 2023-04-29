@@ -7,7 +7,7 @@ Identifying nonlinear causal relations and estimating their effect size help und
 1. Download Docker [here](https://docs.docker.com/get-docker/) and install it.
 2. Download DAG-DeepVASE docker image via the Docker command below:
 ```python
-zhenjiangfan/dagdeepvase:latest
+docker pull zhenjiangfan/dagdeepvase:latest
 ```
 3. Run the Docker image in a Docker container:
 ```python
