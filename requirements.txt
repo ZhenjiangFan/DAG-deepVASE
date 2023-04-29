@@ -1,0 +1,8 @@
+pandas
+numpy
+shutilwhich==1.1.0
+rpy2==3.3.4
+jpype1
+keras==2.3.1
+scipy
+networkx==2.5
