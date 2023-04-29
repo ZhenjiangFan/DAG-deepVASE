@@ -13,6 +13,8 @@ docker pull zhenjiangfan/dagdeepvase:latest
 ```python
 docker run -it --name dagdeepvase dagdeepvase
 ```
+If you would encounter an error message saying 'Unable to find image 'dagdeepvase:latest' locally', please go to Docker application, find the image 'zhenjiangfan/dagdeepvase', and press the 'Run' button to run the image. Then Docker will take to the Container interface, please press the 'OPEN IN TERMINAL' button to open the container terminal.
+
 4. Test DAG-DeepVASE by running the Python code below in the Docker container:
 ```python
 python3 ExampleForDataWithTarget.py
