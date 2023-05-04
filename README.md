@@ -13,7 +13,7 @@ docker pull zhenjiangfan/dagdeepvase:latest
 ```python
 docker run -it --name dagdeepvase dagdeepvase
 ```
-If you would encounter an error message saying 'Unable to find image 'dagdeepvase:latest' locally', please go to Docker application, find the image 'zhenjiangfan/dagdeepvase', and press the 'Run' button to run the image. Then Docker will take you to the Container interface, then please press the 'OPEN IN TERMINAL' button to open the container terminal.
+If you would encounter an error message saying 'Unable to find image 'dagdeepvase:latest' locally', please go to Docker application, find the image 'zhenjiangfan/dagdeepvase', and press the 'Run' button to run the image. Then Docker will take you to the Container interface, then please press the 'OPEN IN TERMINAL' button to open the container terminal.<br />
 If Docker would not be able to run the container and you are using Windows, please install Windows Subsystem for Linux (WSL) 2 by following this tutorial: https://docs.docker.com/desktop/windows/wsl/.
 
 3. Test DAG-DeepVASE using the TCGA BRCA RNA-seq data:
