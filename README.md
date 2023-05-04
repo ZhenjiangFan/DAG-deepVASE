@@ -21,6 +21,7 @@ python3 ExampleUsingBRCAData.py
 ```
 4. Test DAG-DeepVASE by running the Python code below in the Docker container:
 ```python
+mv data/simData/XYData.txt data/XYData.txt
 python3 ExampleForDataWithTarget.py
 ```
 
