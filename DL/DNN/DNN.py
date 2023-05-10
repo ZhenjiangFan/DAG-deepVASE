@@ -1,9 +1,9 @@
 import keras
 from keras.models import Sequential, Model, model_from_json
-from keras.layers import Input, Dense, Dropout, BatchNormalization, merge, LocallyConnected1D, Flatten, Conv1D
+from keras.layers import Input, Dense, Dropout, BatchNormalization, LocallyConnected1D, Flatten, Conv1D
 from keras import backend as K
 from keras import regularizers
-from keras.objectives import mse
+#from keras.objectives import mse
 from keras import regularizers, optimizers
 from keras.callbacks import EarlyStopping
 from keras.initializers import Constant
