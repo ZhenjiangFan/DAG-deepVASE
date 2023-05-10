@@ -148,7 +148,7 @@ class DegenerateGaussianScore:
         #print(result)
         return result;
     
-    def removeCycles(causalGraph):
+    def removeCycles(self,causalGraph):
         #print(causalGraph.edges());
         cycyles = list(nx.simple_cycles(causalGraph));
         for cycle in cycyles:
