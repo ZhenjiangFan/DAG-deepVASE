@@ -1,0 +1,4 @@
+﻿,causalMGM,direct-DG,DAG-deepVASE
+genes to PAM50 (TP),3,5,9
+PAM50 to genes (FP),3,0,0
+b/w PAM50 to clinical features,0,1,5
