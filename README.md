@@ -11,7 +11,7 @@
 
 
 <p align="center">
-  <a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad044/7217083"><b>Paper Link</b>👁️</a>
+  <a href="https://academic.oup.com/bib/article/25/1/bbad512/7517681"><b>Paper Link</b>👁️</a>
 </p>
 
 # Introduction
