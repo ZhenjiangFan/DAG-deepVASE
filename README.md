@@ -1,7 +1,7 @@
 <h1 align="center">Deep neural networks with knockoff features identify nonlinear causal relations and estimate effect sizes in complex biological systems </h1>
 
 <div align="center" style="line-height: 1;">
-  <a href="https://github.com/deepseek-ai/DeepSeek-V3/blob/main/LICENSE-CODE" style="margin: 2px;">
+  <a href="https://github.com/ZhenjiangFan/DAG-deepVASE/blob/main/LICENSE" style="margin: 2px;">
     <img alt="Code License" src="https://img.shields.io/badge/Code_License-MIT-f5de53?&color=f5de53" style="display: inline-block; vertical-align: middle;"/>
   </a>
   <a href="https://github.com/ZhenjiangFan/DAG-deepVASE/blob/main/LICENSE" style="margin: 2px;">
@@ -11,7 +11,7 @@
 
 
 <p align="center">
-  <a href="https://academic.oup.com/bib/article/25/1/bbad512/7517681"><b>Paper Link</b>👁️</a>
+  <a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad044/7217083"><b>Paper Link</b>👁️</a>
 </p>
 
 # Introduction
