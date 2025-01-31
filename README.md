@@ -1,4 +1,4 @@
-<h1 align="center">Deep neural networks with knockoff features identify nonlinear causal relations and estimate effect sizes in complex biological systems </h1>
+<h1 align="center">DAG-deepVASE: Deep neural networks with knockoff features identify nonlinear causal relations and estimate effect sizes in complex biological systems </h1>
 
 <div align="center" style="line-height: 1;">
   <a href="https://github.com/ZhenjiangFan/DAG-deepVASE/blob/main/LICENSE" style="margin: 2px;">
