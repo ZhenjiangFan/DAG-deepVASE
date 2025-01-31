@@ -1,5 +1,19 @@
 <h1 align="center">Deep neural networks with knockoff features identify nonlinear causal relations and estimate effect sizes in complex biological systems </h1>
 
+<div align="center" style="line-height: 1;">
+  <a href="https://github.com/deepseek-ai/DeepSeek-V3/blob/main/LICENSE-CODE" style="margin: 2px;">
+    <img alt="Code License" src="https://img.shields.io/badge/Code_License-MIT-f5de53?&color=f5de53" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <a href="https://github.com/ZhenjiangFan/DAG-deepVASE/blob/main/LICENSE" style="margin: 2px;">
+    <img alt="Model License" src="https://img.shields.io/badge/Model_License-Model_Agreement-f5de53?&color=f5de53" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+</div>
+
+
+<p align="center">
+  <a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad044/7217083"><b>Paper Link</b>👁️</a>
+</p>
+
 # Introduction
 Identifying nonlinear causal relations and estimating their effect size help understand the complex disease pathobiology. Directed Acyclic Graphs using deep-learning VAriable SElection (DAG-deepVASE) is the first computational method that learns both linear and nonlinear causal relations and estimates the effect size using a deep-neural network approach coupled with the knockoff framework.
 
